@@ -16,4 +16,3 @@ def save_transaction(transaction_in_db: TransactionInDB):
     transaction_in_db.id_transaction = generator["id"]
     database_transactions.append(transaction_in_db)
     return transaction_in_db
-
