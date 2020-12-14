@@ -1,12 +1,19 @@
 from datetime import datetime
 from pydantic import BaseModel
+from sqlalchemy import Column, ForeignKey
+from sqlalchemy import Integer, String, DateTime
+from db.db_conection import Base, engine
 
 class TransactionInDB(BaseModel):
-    id_transaction: int = 0
-    username: str
-    date: datetime = datetime.now()
-    value: int
-    actual_balance: int
+    __tablename__ = "transactions"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    username = Column(String, ForeignKey("users.username"))
+    date = Column(DateTime, default=datetime.datetime.utcnow)
+    value = Column(Integer)
+    actual_balance = Column(Integer)
+
+Base.metadata.create_all(bind=engine)
 
 database_transactions = []
 generator = {"id":0}

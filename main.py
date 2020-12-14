@@ -4,22 +4,22 @@ from db.transaction_db import TransactionInDB
 from db.transaction_db import save_transaction
 from models.user_models import UserIn, UserOut
 from models.transaction_models import TransactionIn, TransactionOut
-from fastapi import FastAPI, HTTPException
 import datetime
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 api = FastAPI()
 
-#### Politica CORS
-from fastapi.middleware.cors import CORSMiddleware
-
-origins = ["http://localhost.tiangolo.com", "https://localhost.tiangolo.com", 
-"http://localhost", "http://localhost:8080","https://cajero-app1.herokuapp.com"]
+origins = [
+    "http://localhost.tiangolo.com", "https://localhost.tiangolo.com",
+    "http://localhost", "http://localhost:8080",
+    "https://cajero-app1.herokuapp.com"
+]
 
 api.add_middleware(
-CORSMiddleware, allow_origins=origins,
-allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
+    CORSMiddleware, allow_origins=origins,
+    allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
 )
-#####
 
 @api.post("/user/auth/")
 async def auth_user(user_in: UserIn):
