@@ -6,11 +6,20 @@ from db.db_conection import Base, engine
 
 class UserInDB(BaseModel):
     __tablename__ = "users"
+
     username = Column(String, primary_key=True, unique=True)
     password = Column(String)
     balance = Column(Integer)
 
 Base.metadata.create_all(bind=engine)
+
+'''
+Class UserInDB(BaseModel):
+    username: str
+    password: str
+    balance: int
+
+
 
 database_users = Dict[str, UserInDB]
 
@@ -24,6 +33,7 @@ database_users = {
                             "balance":34000}),
 }
 
+
 def get_user(username: str):
     if username in database_users.keys():
         return database_users[username]
@@ -33,3 +43,5 @@ def get_user(username: str):
 def update_user(user_in_db: UserInDB):
     database_users[user_in_db.username] = user_in_db
     return user_in_db
+
+'''
