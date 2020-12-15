@@ -1,10 +1,10 @@
-from datetime import datetime
-from pydantic import BaseModel
+import datetime
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy import Integer, String, DateTime
 from db.db_conection import Base, engine
 
-class TransactionInDB(BaseModel):
+
+class TransactionInDB(Base):
     __tablename__ = "transactions"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -14,7 +14,10 @@ class TransactionInDB(BaseModel):
     actual_balance = Column(Integer)
 
 Base.metadata.create_all(bind=engine)
+
 '''
+from pydantic import BaseModel
+
 class TransactionInDB(BaseModel):
     id_transaction: int = 0
     username: str

@@ -1,10 +1,8 @@
-from typing import  Dict
-from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String
 from db.db_conection import Base, engine
 
 
-class UserInDB(BaseModel):
+class UserInDB(Base):
     __tablename__ = "users"
 
     username = Column(String, primary_key=True, unique=True)
@@ -14,6 +12,10 @@ class UserInDB(BaseModel):
 Base.metadata.create_all(bind=engine)
 
 '''
+from typing import  Dict
+from pydantic import BaseModel
+
+
 Class UserInDB(BaseModel):
     username: str
     password: str

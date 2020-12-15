@@ -1,3 +1,4 @@
+'''
 from db.user_db import UserInDB
 from db.user_db import update_user, get_user
 from db.transaction_db import TransactionInDB
@@ -5,10 +6,20 @@ from db.transaction_db import save_transaction
 from models.user_models import UserIn, UserOut
 from models.transaction_models import TransactionIn, TransactionOut
 import datetime
-from fastapi import FastAPI, HTTPException
+'''
+
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+from routers.user_router import router as router_users
+from routers.transaction_router import router as router_transactions
+
 api = FastAPI()
+
+api.include_router(router_users)
+api.include_router(router_transactions)
+
+'''
 
 origins = [
     "http://localhost.tiangolo.com", "https://localhost.tiangolo.com",
@@ -68,3 +79,4 @@ async def make_transaction(transaction_in: TransactionIn):
     transaction_out = TransactionOut(**transaction_in_db.dict())
 
     return  transaction_out
+'''
